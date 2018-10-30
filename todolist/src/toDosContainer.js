@@ -1,4 +1,5 @@
 import React from "react";
+import FlipMove from "react-flip-move"
 
 class ToDos extends React.Component {
 
@@ -22,7 +23,13 @@ class ToDos extends React.Component {
     // map function to iterate over every entry passed in and add it to the list
     var listItems = todoEntries.map(this.createTasks);
 
-    return <ul className="theList">{listItems}</ul>;
+    return (
+        <ul className="theList">
+            <FlipMove duration={250} easing="ease-out">
+                {listItems}
+            </FlipMove>
+        </ul>
+    );
   }
 }
 
