@@ -49,12 +49,13 @@ class TodoList extends Component {
         return (
             <div className="todoListMain">
                 <div className="header">
-                    <form onSubmit={this.addToDo}>
+                    <span><form onSubmit={this.addToDo}>
                         {/* ref keyword to pass values up into the addItem function */}
                         <input ref={(a) => this._inputElement = a} placeholder="enter task">
                         </input>
-                        <button type="submit">add</button>
+                        <button type="submit">Add Quick To Do</button>
                     </form>
+                    <button style={{float : "right"}}>Add Full To Do</button></span>
                 </div>
                 {/* pass items array down into ToDos to create the list 1 by 1*/}
                 <ToDos toDoList={this.state.items} delete={this.deleteToDo} />
