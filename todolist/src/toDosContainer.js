@@ -3,13 +3,7 @@ import FlipMove from "react-flip-move"
 
 class ToDos extends React.Component {
 
-  constructor(props) {
-      super(props);
-
-      this.createTasks = this.createTasks.bind(this);
-  }
-
-  createTasks(item) {
+  renderTasks = (item) => {
     return <li onClick={() => this.delete(item.key)} key={item.key}>{item.text}</li>;
   }
 
@@ -18,10 +12,8 @@ class ToDos extends React.Component {
   }
 
   render() {
-    var todoEntries = this.props.entries;
-
     // map function to iterate over every entry passed in and add it to the list
-    var listItems = todoEntries.map(this.createTasks);
+    var listItems = this.props.toDoList.map(this.renderTasks);
 
     return (
         <ul className="theList">
