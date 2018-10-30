@@ -1,5 +1,6 @@
 import React , { Component } from "react";
 import ToDos from "./toDosContainer";
+import "./toDoList.css";
 
 class TodoList extends Component {
 
@@ -7,6 +8,7 @@ class TodoList extends Component {
         super(props);
         // binding this to addItem to avoid using arrow functions
         this.addItem = this.addItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
 
         this.state = {
             items: []
@@ -37,6 +39,16 @@ class TodoList extends Component {
         }
     }
 
+    deleteItem(key) {
+        var filteredItems = this.state.items.filter(function(item) {
+            return (item.key !== key)
+        });
+
+        this.setState({
+            items: filteredItems
+        });
+    }
+
     render() {
         return (
             <div className="todoListMain">
@@ -49,7 +61,7 @@ class TodoList extends Component {
                     </form>
                 </div>
                 {/* pass items array down into ToDos to create the list 1 by 1*/}
-                <ToDos entries={this.state.items} />
+                <ToDos entries={this.state.items} delete={this.deleteItem} />
             </div>
         );
     }
