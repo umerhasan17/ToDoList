@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ToDoList.Models.Folder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create A New Folder", "Create")
+</p>
+
+<table class="table">
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="~/Folders/Details/@item.FolderID">@Html.DisplayFor(modelItem => item.FolderName)</a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.FolderID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.FolderID })
+            </td>
+        </tr>
+    }
+</table>
+
+@* 
+
+    Extra Code Not Needed But Could Be Useful In The Future
+
+<ul class="nav nav-pills nav-stacked">
+    @foreach (var item in Model)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" >@Html.DisplayFor(modelItem => item.FolderName)
+            @if (item.Lists.Any())
+            {
+                <span class="caret"></span>
+            }
+                
+                    @Html.ActionLink("Edit", "Edit", new { id = item.FolderID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.FolderID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FolderID })
+                
+            </a>
+            
+            <ul class="dropdown-menu">
+                @foreach (var list in item.Lists)
+                {
+                    <li><a href="#">@Html.DisplayFor(modelItem => list.ListName)</a></li>
+                }
+            </ul>
+
+        </li>
+    }
+</ul>
+*@
+
+@*<tr>
+        @foreach (var list in item.Lists)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => list.ListName)
+            </td>
+        }
+    </tr>*@

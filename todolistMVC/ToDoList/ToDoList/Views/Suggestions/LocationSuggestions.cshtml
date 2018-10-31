@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ToDoList.Models.ToDo>
+
+@{
+    ViewBag.Title = "LocationSuggestions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LocationSuggestions</h2>
+
+<p>These are some tasks you can carry out nearby</p>
+
+<table class="table">
+    <tr>
+        <td style="width: 80%"><strong>Description</strong></td>
+        <td style="width: 20%"><strong>Due Date</strong></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td  style="width:80%;">@Html.DisplayFor(modelItem => item.Description)</td>
+            <td  style="width: 20%;">
+                @if (item.DueDate != null)
+                {
+                    @item.DueDate.Value.ToString("dd/MM/yyyy")
+                }
+            </td>
+        </tr>
+    }
+
+</table>

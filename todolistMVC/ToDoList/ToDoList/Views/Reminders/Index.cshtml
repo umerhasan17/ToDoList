@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ToDoList.Models.ToDo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reminders</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReminderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriorityLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @if (item.DueDate != null)
+            {
+                @item.DueDate.Value.ToString("dd/MM/yyyy")
+            }
+        </td>
+        <td>
+            @if (item.ReminderDate != null)
+            {
+                @item.ReminderDate.Value.ToString("dd/MM/yyyy")
+            }
+        </td>
+        <td>
+            @if (item.PriorityLevel == 1)
+            {
+                <p>ASAP</p>
+            }
+            @if (item.PriorityLevel == 2)
+            {
+                <p>High</p>
+            }
+            @if (item.PriorityLevel == 3)
+            {
+                <p>Medium</p>
+            }
+            @if (item.PriorityLevel == 4)
+            {
+                <p>Low</p>
+            }
+            @if (item.PriorityLevel == null)
+            {
+                <p>None</p>
+            }
+
+        </td>
+        <td>
+            @if (item.Duration != null)
+            {
+                @item.Duration.Value.ToString(@"hh\:mm");
+            }
+        </td>
+    </tr>
+}
+
+</table>

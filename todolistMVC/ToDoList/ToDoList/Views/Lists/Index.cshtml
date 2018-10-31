@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ToDoList.Models.List>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create A New List", "Create")
+</p>
+<table class="table">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="~/Lists/Details/@item.ListID">@Html.DisplayFor(modelItem => item.ListName)</a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ListID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ListID })
+        </td>
+    </tr>
+}
+
+</table>

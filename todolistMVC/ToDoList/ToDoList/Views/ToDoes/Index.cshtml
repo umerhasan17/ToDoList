@@ -1,0 +1,49 @@
+﻿@model ToDoList.Models.ToDo
+<!-- line above changed from IEnumerable to singular-->
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+
+
+<!-- Add list name here -->
+
+<div class="container">
+    <div id="todoCreateForm">
+        @using (Ajax.BeginForm("AJAXCreate", "ToDoes", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST", UpdateTargetId = "tableDiv" }))
+        {
+            <div class="form-group">
+                @Html.AntiForgeryToken()
+                <div>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 100%;", @placeholder = "Add a quick to-do" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+<div class="container" id="tableDiv"></div>
+
+<div class="container">
+    <p>
+        @Html.ActionLink("Create a new to-do", "Create")
+    </p>
+</div>
+
+
+
+<!-- the BuilTable.js scripts calls the Controller to build the table and then returns the results to the tableDiv presented above. -->
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/BuildTable.js"></script>
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="~/Custom_Scripts/EmptyQuickAddBox.js"></script>
+    <script src="~/Custom_Scripts/AddCheckBoxListener.js"></script>
+
+}
+

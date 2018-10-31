@@ -1,0 +1,22 @@
+﻿@media (min-width: 768px) and (max-width: 1200px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-toggle {
+        display: block !important;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+}
+
+.jumbotron {
+    background-color: #428bca;
+    color: #FFFFFF;
+}
+
+.table tr:hover {
+    background-color: rgb(245, 245, 245) 
+}

@@ -1,0 +1,131 @@
+﻿@model ToDoList.Models.ToDo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!-- stylesheets for jQuery-->
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+
+<style type="text/css">
+    #map {
+        width: 500px;
+        height: 400px;
+    }
+</style>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz_AZzqqa1WQ1_2W7r3haI7TpIu9ThC90&callback=initMap"
+        type="text/javascript"></script>
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" >
+        <h4>Create a ToDo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "description", @oninput = "DescriptionListener()" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", @id = "due-date" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReminderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReminderDate, new { htmlAttributes = new { @class = "form-control", @id = "reminder-date" } })
+                @Html.ValidationMessageFor(model => model.ReminderDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PriorityLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PriorityLevel, new List<SelectListItem>() { new SelectListItem() { Text = "ASAP", Value = "1" }, new SelectListItem() { Text = "High", Value = "2" }, new SelectListItem() { Text = "Medium", Value = "3" }, new SelectListItem() { Text = "Low", Value = "4" } }, new { htmlAttributes = new { @class = "form-control", @id = "priority-level" } })
+                @Html.ValidationMessageFor(model => model.PriorityLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <p>Select a location where the task will be carried out. Click on a location to select it. Drag the marker to change it.</p>
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "lat", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lon, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "lng", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Lon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<!--Scripts needed adding dates into the DateTime values-->
+<script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+
+@section Scripts {
+    <!--Custom script created for inputting Location Values-->
+    <script type="text/javascript" src="~/Custom_Scripts/map.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <!-- This script is for using the datepicker library from jQuery in some of the fields above. -->
+    <script type="text/javascript" src="~/Custom_Scripts/DatePickerCustomScript.js"></script>
+
+    <!--This script is for the natural language processing in the description section-->
+    <script type="text/javascript" src="~/Custom_Scripts/DescriptionListener.js"></script>
+
+}

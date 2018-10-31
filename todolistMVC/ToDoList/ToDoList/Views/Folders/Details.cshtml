@@ -1,0 +1,26 @@
+﻿@model ToDoList.Models.Folder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.FolderName)</h2>
+
+<div>
+    <a href="~/Lists/Create?FolderId=@Model.FolderID">Create a list for this folder</a>
+    <br /><br />
+    <table class="table">
+        @foreach (var item in Model.Lists)
+        {
+            <tr>
+                <td style="width: 60%"><a href="~/Lists/Details/@item.ListID">@Html.DisplayFor(modelItem => item.ListName)</a></td>
+
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FolderID }) |
+    @Html.ActionLink("Back to Dashboard", "Index")
+</p>

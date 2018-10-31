@@ -1,0 +1,33 @@
+﻿@model ToDoList.Models.List
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.ListName)</h2>
+
+<div>
+    <a href="~/ToDoes/Create?ListId=@Model.ListID">Create a ToDo for this list</a>
+    <br /><br />
+    <table class="table">
+            @foreach (var item in Model.ToDos)
+            {
+                <tr>
+                    <td style="width: 60%">@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td style="width: 20%">
+                    @if (item.DueDate != null)
+                    {
+                        @item.DueDate.Value.ToString("dd/MM/yyyy")
+                    }
+                    </td>
+                    <td style="width: 20%"><a href="~/ToDoes/Edit/@item.ToDoID">Edit</a> | <a href="~/ToDoes/Details/@item.ToDoID">Details</a> | <a href="~/ToDoes/Delete/@item.ToDoID">Delete</a></td>
+                </tr>
+            }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ListID }) |
+    @Html.ActionLink("Back to Dashboard", "Index")
+    
+    
+</p>

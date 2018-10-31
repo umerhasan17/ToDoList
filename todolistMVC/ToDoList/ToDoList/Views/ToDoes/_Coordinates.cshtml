@@ -1,0 +1,14 @@
+﻿@model ToDoList.Models.ToDo
+
+@{ 
+    ViewBag.Title = "Map Helper View";
+}
+
+<div id="my-latitude">
+    @Html.DisplayFor(Model => Model.Lat)
+</div>
+
+
+<div id="my-longitude">
+    @Html.DisplayFor(Model => Model.Lon)
+</div>

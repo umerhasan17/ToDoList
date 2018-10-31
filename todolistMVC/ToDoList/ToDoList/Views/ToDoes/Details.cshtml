@@ -1,0 +1,89 @@
+﻿@model ToDoList.Models.ToDo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ToDo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReminderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReminderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriorityLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriorityLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.List)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.List.ListName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ToDoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

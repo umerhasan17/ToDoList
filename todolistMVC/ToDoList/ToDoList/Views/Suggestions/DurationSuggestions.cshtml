@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ToDoList.Models.ToDo>
+
+@{
+    ViewBag.Title = "Duration Suggestions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Duration Suggestions</h2>
+
+<p>Try and knock some of these off, in the time you have remaining.</p>
+
+<table class="table">
+    <tr>
+        <td style="width: 80%"><strong>Description</strong></td>
+        <td style="width: 20%"><strong>Duration</strong></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width:80%">@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+        </tr>
+    }
+
+</table>

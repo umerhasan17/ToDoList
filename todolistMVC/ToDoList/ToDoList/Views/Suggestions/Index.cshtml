@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ToDoList.Models.ToDo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    .col-md-4 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+</style>
+
+
+<h2>Suggestions</h2>
+
+<div class="row">
+    <br />
+    <div class="col-md-4">
+
+        <label>What can you do right now?</label><br />
+        @using (Ajax.BeginForm("GetMyGeneralSuggestions", "Suggestions", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" id="general-suggestions" class="btn btn-primary">Generate Suggestions</button>
+        } 
+
+    </div>
+    
+    <div class="col-md-4">
+        
+        @using (Ajax.BeginForm("GetMyDurationSuggestions", "Suggestions", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST"}))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="durationInput">How much time do you have?</label>
+                <input type="time" name ="durationInput" class="form-control" id="durationInput" required />
+            </div>
+            <div>
+                <button type = "submit" id="duration-suggestions" class="btn btn-primary">Generate Duration Suggestions</button>
+            </div>
+        }  
+    </div>
+    
+    <div class="col-md-4">
+        
+        <label>Where are you at the moment?</label><br />
+        <button class="btn" onclick="getLocation()">Get My Location</button> <br /> <br />
+        @using (Ajax.BeginForm("GetMyLocationSuggestions" , "Suggestions" , new AjaxOptions { InsertionMode = InsertionMode.Replace , HttpMethod = "POST" }))
+        {
+            <input type="number" step="any" name="latitude" class="form-control" id="myLatitude"  required />
+            <input type="number" step ="any" name="longitude" class="form-control" id="myLongitude" required /> <br />
+            @Html.AntiForgeryToken() 
+            <button type="submit" id="location-suggestions" class="btn btn-primary" >Generate Location Suggestions</button>
+        } 
+    </div>
+</div>
+
+
+
+@section scripts {
+    
+
+    <!-- script to get latitude and longitude of user -->
+    <script src="~/Custom_Scripts/GetUserCurrentPosition.js"></script> 
+
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+
+
+     
+    }
+
